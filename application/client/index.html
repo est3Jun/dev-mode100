@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AB Store</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">AB Store</h1>
+        <form id="initForm" class="mt-3">
+            <h3>Initialize</h3>
+            <div class="form-group">
+                <label for="sell">Sell:</label>
+                <input type="text" class="form-control" id="sell" name="sell">
+            </div>
+            <div class="form-group">
+                <label for="sellVal">Sell Value:</label>
+                <input type="text" class="form-control" id="sellVal" name="sellVal">
+            </div>
+            <div class="form-group">
+                <label for="buy">Buy:</label>
+                <input type="text" class="form-control" id="buy" name="buy">
+            </div>
+            <div class="form-group">
+                <label for="buyVal">Buy Value:</label>
+                <input type="text" class="form-control" id="buyVal" name="buyVal">
+            </div>
+            <div class="form-group">
+                <label for="company">Company:</label>
+                <input type="text" class="form-control" id="company" name="company">
+            </div>
+            <div class="form-group">
+                <label for="companyVal">Company Value:</label>
+                <input type="text" class="form-control" id="companyVal" name="companyVal">
+            </div>
+            <button type="submit" class="btn btn-primary">Initialize</button>
+        </form>
+
+        <form id="invokeForm" class="mt-5">
+            <h3>Invoke</h3>
+            <div class="form-group">
+                <label for="sell">Sell:</label>
+                <input type="text" class="form-control" id="sell" name="sell">
+            </div>
+            <div class="form-group">
+                <label for="buy">Buy:</label>
+                <input type="text" class="form-control" id="buy" name="buy">
+            </div>
+            <div class="form-group">
+                <label for="company">Company:</label>
+                <input type="text" class="form-control" id="company" name="company">
+            </div>
+            <div class="form-group">
+                <label for="itemName">Item Name:</label>
+                <input type="text" class="form-control" id="itemName" name="itemName">
+            </div>
+            <div class="form-group">
+                <label for="X">X:</label>
+                <input type="text" class="form-control" id="X" name="X">
+            </div>
+            <button type="submit" class="btn btn-primary">Invoke</button>
+        </form>
+
+        <form id="queryForm" class="mt-5">
+            <h3>Query</h3>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name">
+            </div>
+            <button type="submit" class="btn btn-primary">Query</button>
+        </form>
+
+        <div id="response" class="mt-5">
+            <!-- Response will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        $(document).
+        ready(function () {
+            // Form submit handlers
+            $('#initForm').submit(function (event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                $.get('/init?' + formData, function (data) {
+                    $('#response').html(data);
+                });
+            });
+
+            $('#invokeForm').submit(function (event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                $.get('/invoke?' + formData, function (data) {
+                    $('#response').html(data);
+                });
+            });
+
+            $('#queryForm').submit(function (event) {
+                event.preventDefault();
+                var formData = $(this).serialize();
+                $.get('/query?' + formData, function (data) {
+                    $('#response').html(data);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
